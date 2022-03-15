@@ -25,8 +25,6 @@ export default class extends Controller {
     container[0].appendChild(number);
     container[0].appendChild(errors);
     container[0].appendChild(fails);
-
-    this.element.textContent = "Clicked!";
   }
 
   connect() {

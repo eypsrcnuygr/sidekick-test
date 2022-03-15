@@ -1,3 +1,5 @@
+require 'pry'
+
 class SessionsController < ApplicationController
   before_action :set_session, only: %i[ show edit update destroy ]
 
@@ -21,7 +23,8 @@ class SessionsController < ApplicationController
 
   # POST /sessions or /sessions.json
   def create
-    @session = Session.new(session_params)
+    @session = Session.new(session_params.except(:tries))
+    @session.tries.push(params[:session][:tries].each_slice(3).map { |pair| pair.join(',') }).flatten!
 
     respond_to do |format|
       if @session.save
